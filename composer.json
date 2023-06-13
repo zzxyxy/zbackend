@@ -1,7 +1,8 @@
 {
     "require": {
         "php-mqtt/client": "^1.8",
-        "slim/slim": "4.*"
+        "slim/slim": "4.*",
+        "php-di/php-di": "^7.0"
     },
     "autoload": {
         "classmap": [
