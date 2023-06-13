@@ -9,4 +9,9 @@ class Test
     {
         $this->pub = $val;
     }
+
+    public function add($x, $y)
+    {
+        return $x + $y;
+    }
 }

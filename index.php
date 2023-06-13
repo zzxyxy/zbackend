@@ -1,9 +1,6 @@
 <?php
 
-include 'vendor\autoload.php';
-foreach (glob("core/*.php") as $filename) {
-    include $filename;
-}
+include '/bootstrap.php';
 
 $server   = 'zxyxyhome.duckdns.org';
 $port     = 1883;
@@ -17,6 +14,3 @@ $connectionSettings = (new \PhpMqtt\Client\ConnectionSettings)
 $mqtt->connect($connectionSettings);
 $mqtt->publish('core', '{"req": "ping", "topic": "core"}', 0);
 $mqtt->disconnect();
-
-
-echo "end";
