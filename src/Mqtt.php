@@ -20,7 +20,7 @@ class Mqtt implements Imqtt
         $this->pass = $pass;
         $this->clientId = 'test-publisher';
 
-        $this->mqtt = new \PhpMqtt\Client\MqttClient($server, $port, $clientId);
+        $this->mqtt = new \PhpMqtt\Client\MqttClient($server, $port, $this->clientId);
         $this->connectionSettings = (new \PhpMqtt\Client\ConnectionSettings)
             ->setUsername("iot")
             ->setPassword("RyzYK8G53ZCnOR1OKlYL28yNoOagKG");

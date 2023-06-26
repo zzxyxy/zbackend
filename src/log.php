@@ -8,11 +8,11 @@ class Log implements Logging
     {
     }
 
-    private static Log $instance;
+    private static ?Log $instance = NULL;
 
     public static function getInstance()
     {
-        if (! defined($instance)) {
+        if (! defined(Log::$instance)) {
             Log::$instance = new Log();
         }
         return Log::$instance;
