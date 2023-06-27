@@ -1,5 +1,8 @@
-## NOTE
 
+
+        stage("Empty api folder") {
+            steps {
+                sh '''
 #!/bin/bash
 HOST=zxyxy.net
 USER=zxyxynet
@@ -11,4 +14,6 @@ cd www
 mrm -r api
 mkdir api
 cd api
-EOF
+EOF'''
+            }
+        }

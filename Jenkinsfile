@@ -17,23 +17,6 @@ pipeline {
                 archiveArtifacts artifacts: '**/*', followSymlinks: false, onlyIfSuccessful: true
             }
         }
-        stage("Empty api folder") {
-            steps {
-                sh '''
-#!/bin/bash
-HOST=zxyxy.net
-USER=zxyxynet
-PASSWORD=3oR37v3Hho
-
-lftp -u $USER,$PASSWORD $HOST << EOF
-set ssl:verify-certificate false
-cd www
-mrm -r api
-mkdir api
-cd api
-EOF'''
-            }
-        }
         stage("Upload api folder") {
             steps {
                 sh '''
@@ -46,7 +29,7 @@ lftp -u $USER,$PASSWORD $HOST << EOF
 set ssl:verify-certificate false
 cd www
 cd api
-mirror -R -v
+mirror -R -v -e --scan-all-first
 EOF'''
             }
         }
