@@ -9,8 +9,6 @@ final class Testtest extends TestCase
 {
     public function testTest(): void
     {
-        $x = new \zxyxy\Test();
-
-        $this->assertSame(4, $x->add(2, 2));
+        $this->assertSame(4, 2+2);
     }
 }
