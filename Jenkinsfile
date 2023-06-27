@@ -29,7 +29,7 @@ lftp -u $USER,$PASSWORD $HOST << EOF
 set ssl:verify-certificate false
 cd www
 cd api
-mirror -R -v -e --scan-all-first -x ^\.git/$ -x .gitignore -x composer.json -x composer.lock -x Jenkinsfile -x Makefie
+mirror -R -v -e --scan-all-first -x (^\|/)git/ -x .gitignore -x composer.json -x composer.lock -x Jenkinsfile -x Makefie
 EOF'''
             }
         }
