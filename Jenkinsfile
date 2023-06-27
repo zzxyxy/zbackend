@@ -46,7 +46,7 @@ lftp -u $USER,$PASSWORD $HOST << EOF
 set ssl:verify-certificate false
 cd www
 cd api
-mirror -R . .
+mput *.php
 EOF'''
             }
         }
