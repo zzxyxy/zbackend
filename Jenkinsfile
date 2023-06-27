@@ -12,6 +12,11 @@ pipeline {
                 sh 'composer install'
             }
         }
+        stage('Run test') {
+            steps {
+                sh 'php ./vendor/bin/phpunit --testdox tests'
+            }
+        }
         stage('Archive') {
             steps {
                 archiveArtifacts artifacts: '**/*', followSymlinks: false, onlyIfSuccessful: true
