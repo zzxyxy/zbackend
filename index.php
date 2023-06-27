@@ -1,22 +1,29 @@
 <?php
+include 'bootstrap.php';
 
-include 'vendor\autoload.php';
-foreach (glob("core/*.php") as $filename) {
-    include $filename;
-}
+use Psr\Http\Message\ResponseInterface as Response;
+use Psr\Http\Message\ServerRequestInterface as Request;
+use Slim\Factory\AppFactory;
 
-$server   = 'zxyxyhome.duckdns.org';
-$port     = 1883;
-$clientId = 'test-publisher';
+$builder = new DI\ContainerBuilder();
+#$builder->setDefinitionCache(new ApcCache());
+$container = $builder->build();
+$container->set('log\Logging', \log\Log::getInstance());
+#$container->set(
+#    'zxyxy\mqtt\Imqtt',
+#    new zxyxy\mqtt\Mqtt('zxyxyhome.duckdns.org', 1883, "iot", "RyzYK8G53ZCnOR1OKlYL28yNoOagKG")
+#);
 
-$mqtt = new \PhpMqtt\Client\MqttClient($server, $port, $clientId);
-$connectionSettings = (new \PhpMqtt\Client\ConnectionSettings)
-    ->setUsername("iot")
-    ->setPassword("RyzYK8G53ZCnOR1OKlYL28yNoOagKG");
+#$t = $container->get('\zxyxy\Test');
+#$t->testlog('blabla');
+#$t->send("testtopic", "testmessage");
 
-$mqtt->connect($connectionSettings);
-$mqtt->publish('core', '{"req": "ping", "topic": "core"}', 0);
-$mqtt->disconnect();
+$app = AppFactory::create();
 
+$app->get('/hello/{name}', function (Request $request, Response $response, array $args) {
+    $name = $args['name'];
+    $response->getBody()->write("Hello, $name");
+    return $response;
+});
 
-echo "end";
+$app->run();
