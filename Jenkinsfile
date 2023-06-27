@@ -29,7 +29,7 @@ lftp -u $USER,$PASSWORD $HOST << EOF
 set ssl:verify-certificate false
 cd www
 cd api
-mirror -R -v -e --scan-all-first --include=*php
+mirror -R -v -e --scan-all-first --include=[a-z1-9]*[.]php
 EOF'''
             }
         }
