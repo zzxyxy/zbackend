@@ -20,7 +20,7 @@ $container->set('log\Logging', \log\Log::getInstance());
 
 $app = AppFactory::create();
 
-$app->get('/hello/{name}', function (Request $request, Response $response, array $args) {
+$app->get('/api/hello/{name}', function (Request $request, Response $response, array $args) {
     $name = $args['name'];
     $response->getBody()->write("Hello, $name");
     return $response;
