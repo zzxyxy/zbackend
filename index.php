@@ -30,11 +30,22 @@ $app->post('/api/v1/send/{topic}', function (Request $request, Response $respons
 
     if (strstr($contentType, 'application/json')) {
         $req = file_get_contents('php://input');
+        $url = "http://api.zxyxyhome.duckdns.org/api/v1/send/$topic" ;
 
-        $t = $container->get('\zxyxy\Test');
-        $t->send($topic, $req);
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $req);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 3);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 5);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+        $server_output = curl_exec($ch);
 
-        $response->getBody()->write('{"result": "ok"}');
+        curl_close($ch);
+
+        $response->getBody()->write($server_output);
         return $response;
     }
 
