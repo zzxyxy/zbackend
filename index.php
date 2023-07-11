@@ -24,8 +24,12 @@ $app->post('/api/v1/send/{topic}', function (Request $request, Response $respons
     $contentType = $request->getHeaderLine('Content-Type');
 
     if (strstr($contentType, 'application/json')) {
-        $req = file_get_contents('php://input');
+#        $req = file_get_contents('php://input');
+        $req = $request->getBody();
+
         $url = "http://api.zxyxyhome.duckdns.org/api/v1/send/$topic" ;
+
+        print($req);
 
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
