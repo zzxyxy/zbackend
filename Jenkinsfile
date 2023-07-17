@@ -34,7 +34,7 @@ lftp -u $USER,$PASSWORD $HOST << EOF
 set ssl:verify-certificate false
 cd www
 cd api
-mirror -R -v -e --scan-all-first --delete-excluded --include=[a-z1-9]*[.]php
+mirror -R -v -e --scan-all-first --delete-excluded --include=[a-z1-9]*[.]php --exclude .git/ --exclude tests/
 EOF'''
             }
         }
